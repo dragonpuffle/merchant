@@ -32,99 +32,310 @@ body {
   height: 100%;
 }
 
+/* Route Selection Styles */
+.route-selection {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.route-selection-content {
+  width: 100%;
+  max-width: 500px;
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.route-selection-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.routes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.route-card {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.route-card:hover {
+  border-color: #667eea;
+  background: #f8f9ff;
+}
+
+.route-card.selected {
+  border-color: #667eea;
+  background: #f0f4ff;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+.route-card-number {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+  margin-right: 16px;
+  flex-shrink: 0;
+}
+
+.route-card-content {
+  flex: 1;
+}
+
+.route-card-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.route-card-description {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.4;
+}
+
+.route-card-indicator {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkmark {
+  color: #667eea;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.start-button {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.start-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+}
+
+.start-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.start-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Attraction Card Styles */
 .attraction-card {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
   background: white;
-  border-radius: 16px 16px 0 0;
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-  padding: 16px;
-  max-height: 60vh;
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+  max-height: 70vh;
   overflow-y: auto;
   transition: transform 0.3s ease;
+  z-index: 1000;
 }
 
 .attraction-card.hidden {
   transform: translateY(100%);
 }
 
-.attraction-image {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 8px;
+.close-button {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(0, 0, 0, 0.05);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: #666;
+  transition: all 0.2s ease;
+}
+
+.close-button:hover {
+  background: rgba(0, 0, 0, 0.1);
+  color: #333;
+}
+
+.point-indicator {
+  display: inline-block;
+  padding: 6px 12px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
   margin-bottom: 12px;
 }
 
+.attraction-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
 .attraction-name {
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 22px;
+  font-weight: 700;
   margin-bottom: 8px;
   color: #333;
+  line-height: 1.3;
 }
 
 .attraction-address {
   font-size: 14px;
   color: #666;
   margin-bottom: 12px;
+  font-weight: 500;
 }
 
 .attraction-description {
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: 15px;
+  line-height: 1.6;
   color: #444;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
-.audio-player {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.play-button {
-  background: #2481cc;
+.next-point-button {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   border: none;
-  border-radius: 8px;
-  padding: 12px 24px;
+  border-radius: 12px;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  margin-top: 8px;
 }
 
-.play-button:hover {
-  background: #1a6ba8;
+.next-point-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
 }
 
-.play-button:active {
-  background: #145a8a;
+.next-point-button:active {
+  transform: translateY(0);
+}
+
+/* Audio Player Styles */
+.audio-player {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.play-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 14px 28px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.play-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+}
+
+.play-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.play-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .progress-container {
   width: 100%;
-  height: 4px;
+  height: 6px;
   background: #e0e0e0;
-  border-radius: 2px;
+  border-radius: 3px;
   overflow: hidden;
+  cursor: pointer;
+  transition: height 0.2s ease;
+}
+
+.progress-container:hover {
+  height: 8px;
 }
 
 .progress-bar {
   height: 100%;
-  background: #2481cc;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
   transition: width 0.1s linear;
 }
 
 .time-display {
   display: flex;
   justify-content: space-between;
-  font-size: 12px;
+  font-size: 13px;
   color: #666;
+  font-weight: 500;
 }
 
+/* Loading and Error States */
 .loading {
   display: flex;
   justify-content: center;
@@ -132,6 +343,7 @@ body {
   height: 100vh;
   font-size: 18px;
   color: #666;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 .error {
@@ -141,6 +353,8 @@ body {
   height: 100vh;
   font-size: 18px;
   color: #d32f2f;
+  padding: 20px;
+  text-align: center;
 }
 
 /* Telegram Mini App specific styles */
@@ -148,8 +362,8 @@ body {
   --tg-theme-bg-color: #ffffff;
   --tg-theme-text-color: #000000;
   --tg-theme-hint-color: #999999;
-  --tg-theme-link-color: #2481cc;
-  --tg-theme-button-color: #2481cc;
+  --tg-theme-link-color: #667eea;
+  --tg-theme-button-color: #667eea;
   --tg-theme-button-text-color: #ffffff;
   --tg-theme-secondary-bg-color: #f1f1f1;
 }
@@ -162,4 +376,36 @@ body {
   --tg-theme-button-color: #64b5ef;
   --tg-theme-button-text-color: #ffffff;
   --tg-theme-secondary-bg-color: #2c2c2e;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .route-selection-content {
+    padding: 20px;
+  }
+
+  .route-selection-title {
+    font-size: 24px;
+  }
+
+  .route-card-name {
+    font-size: 16px;
+  }
+
+  .route-card-description {
+    font-size: 13px;
+  }
+
+  .attraction-card {
+    padding: 16px;
+    max-height: 80vh;
+  }
+
+  .attraction-image {
+    height: 180px;
+  }
+
+  .attraction-name {
+    font-size: 20px;
+  }
 }

@@ -5,9 +5,20 @@ import AudioPlayer from './AudioPlayer';
 interface AttractionCardProps {
   attraction: Attraction | null;
   onClose: () => void;
+  onNextPoint: () => void;
+  hasNextPoint: boolean;
+  currentPointNumber: number;
+  totalPoints: number;
 }
 
-export default function AttractionCard({ attraction, onClose }: AttractionCardProps) {
+export default function AttractionCard({ 
+  attraction, 
+  onClose, 
+  onNextPoint, 
+  hasNextPoint,
+  currentPointNumber,
+  totalPoints 
+}: AttractionCardProps) {
   const [isPlaying, setIsPlaying] = useState(false);
 
   if (!attraction) {
@@ -26,22 +37,7 @@ export default function AttractionCard({ attraction, onClose }: AttractionCardPr
     <div className={`attraction-card ${!attraction ? 'hidden' : ''}`}>
       <button
         onClick={onClose}
-        style={{
-          position: 'absolute',
-          top: '8px',
-          right: '8px',
-          background: 'rgba(0, 0, 0, 0.1)',
-          border: 'none',
-          borderRadius: '50%',
-          width: '32px',
-          height: '32px',
-          cursor: 'pointer',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontSize: '20px',
-          color: '#666',
-        }}
+        className="close-button"
       >
         ×
       </button>
@@ -55,6 +51,10 @@ export default function AttractionCard({ attraction, onClose }: AttractionCardPr
         }}
       />
 
+      <div className="point-indicator">
+        Точка {currentPointNumber} из {totalPoints}
+      </div>
+
       <h2 className="attraction-name">{attraction.name}</h2>
       <p className="attraction-address">{attraction.address}</p>
       <p className="attraction-description">{attraction.description}</p>
@@ -65,6 +65,15 @@ export default function AttractionCard({ attraction, onClose }: AttractionCardPr
         onPlay={handlePlay}
         onPause={handlePause}
       />
+
+      {hasNextPoint && (
+        <button
+          className="next-point-button"
+          onClick={onNextPoint}
+        >
+          Следующая точка →
+        </button>
+      )}
     </div>
   );
 }
