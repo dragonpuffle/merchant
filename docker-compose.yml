@@ -14,6 +14,8 @@ services:
       - CORS_ORIGINS=*
     volumes:
       - ./backend/data:/app/data
+      - ./backend/images:/app/images
+      - ./backend/audio:/app/audio
     networks:
       - audio-guide-network
     restart: unless-stopped

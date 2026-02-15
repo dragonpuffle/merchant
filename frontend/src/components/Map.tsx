@@ -8,9 +8,10 @@ interface MapProps {
   routeAttractions: Attraction[];
   selectedAttraction: Attraction | null;
   onAttractionClick: (attraction: Attraction) => void;
+  isCustomRoute?: boolean;
 }
 
-export default function Map({ attractions, route, routeAttractions, selectedAttraction, onAttractionClick }: MapProps) {
+export default function Map({ attractions, route, routeAttractions, selectedAttraction, onAttractionClick, isCustomRoute: _isCustomRoute = false }: MapProps) {
   const [mapState, setMapState] = useState({
     center: [56.3269, 44.0075] as [number, number],
     zoom: 14,

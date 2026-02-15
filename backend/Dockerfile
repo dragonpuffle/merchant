@@ -23,6 +23,8 @@ RUN uv sync --frozen
 # Copy application code
 COPY app/ ./app/
 COPY data/ ./data/
+COPY images/ ./images/
+COPY audio/ ./audio/
 
 # Create non-root user
 RUN useradd -m -u 1000 appuser && chown -R appuser:appuser /app

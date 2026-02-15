@@ -2,9 +2,11 @@
 
 from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
 
 from app.api.routes import router
 from app.core.config import get_settings
@@ -54,6 +56,16 @@ def create_app() -> FastAPI:
 
     # Include API routes
     app.include_router(router, prefix=settings.api_prefix)
+
+    # Mount static files directory for images
+    images_path = Path(__file__).parent.parent / "images"
+    if images_path.exists():
+        app.mount("/images", StaticFiles(directory=str(images_path)), name="images")
+
+    # Mount static files directory for audio
+    audio_path = Path(__file__).parent.parent / "audio"
+    if audio_path.exists():
+        app.mount("/audio", StaticFiles(directory=str(audio_path)), name="audio")
 
     # Add exception handlers
     @app.exception_handler(HTTPException)
