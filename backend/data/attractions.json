@@ -10,7 +10,7 @@
         "lon": 43.998804
       },
       "image": "/images/nizhny-novgorod-state-bank.webp",
-      "audio_url": "/audio/nizhny-novgorod-state-bank.mp3",
+      "audio_url": "/audio/generated1.mp3",
       "order": 1
     },
     {
@@ -23,7 +23,7 @@
         "lon": 43.997265
       },
       "image": "/images/zelensky-descent.webp",
-      "audio_url": "/audio/zelensky-descent.mp3",
+      "audio_url": "/audio/generated1.mp3",
       "order": 2
     },
     {
@@ -36,7 +36,7 @@
         "lon": 43.997378
       },
       "image": "/images/bugrov-night-shelter.webp",
-      "audio_url": "/audio/bugrov-night-shelter.mp3",
+      "audio_url": "/audio/generated1.mp3",
       "order": 3
     },
     {
@@ -49,7 +49,7 @@
         "lon": 43.994306
       },
       "image": "/images/nikolaev-city-public-bank.jpg",
-      "audio_url": "/audio/nikolaev-city-public-bank.mp3",
+      "audio_url": "/audio/generated1.mp3",
       "order": 4
     },
     {
@@ -62,7 +62,7 @@
         "lon": 43.993554
       },
       "image": "/images/salt-office.webp",
-      "audio_url": "/audio/salt-office.mp3",
+      "audio_url": "/audio/generated1.mp3",
       "order": 5
     },
     {
@@ -75,7 +75,7 @@
         "lon": 43.992878
       },
       "image": "/images/rukavishnikov-bank.webp",
-      "audio_url": "/audio/rukavishnikov-bank.mp3",
+      "audio_url": "/audio/generated1.mp3",
       "order": 6
     },
     {
@@ -88,7 +88,7 @@
         "lon": 43.991969
       },
       "image": "/images/volga-kama-bank.webp",
-      "audio_url": "/audio/volga-kama-bank.mp3",
+      "audio_url": "/audio/generated1.mp3",
       "order": 7
     },
     {
@@ -101,7 +101,7 @@
         "lon": 43.992754
       },
       "image": "/images/mayak-factory.webp",
-      "audio_url": "/audio/mayak-factory.mp3",
+      "audio_url": "/audio/generated1.mp3",
       "order": 8
     },
     {
@@ -114,7 +114,7 @@
         "lon": 43.988613
       },
       "image": "/images/blinovsky-passage.webp",
-      "audio_url": "/audio/blinovsky-passage.mp3",
+      "audio_url": "/audio/generated1.mp3",
       "order": 9
     },
     {
@@ -127,7 +127,7 @@
         "lon": 43.986715
       },
       "image": "/images/nizhny-novgorod-stock-exchange.webp",
-      "audio_url": "/audio/nizhny-novgorod-stock-exchange.mp3",
+      "audio_url": "/audio/generated1.mp3",
       "order": 10
     },
     {
@@ -140,7 +140,7 @@
         "lon": 43.961296
       },
       "image": "/images/nizhny-novgorod-trade-fair.webp",
-      "audio_url": "/audio/nizhny-novgorod-trade-fair.mp3",
+      "audio_url": "/audio/generated1.mp3",
       "order": 11
     }
   ]
