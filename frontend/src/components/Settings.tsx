@@ -184,12 +184,12 @@ export default function Settings({ settings, onSettingsChange, onBack }: Setting
           
           <div className="info-item">
             <div className="info-label">Версия</div>
-            <div className="info-value">1.0.0</div>
+            <div className="info-value">0.0.1</div>
           </div>
           
           <div className="info-item">
             <div className="info-label">Разработчик</div>
-            <div className="info-value">Audio Guide Team</div>
+            <div className="info-value">ADDA</div>
           </div>
         </div>
       </div>
