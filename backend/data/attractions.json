@@ -9,8 +9,8 @@
         "lat": 56.3269,
         "lon": 44.0075
       },
-      "image": "/images/state-bank.jpg",
-      "audio_url": "/audio/state-bank.mp3",
+      "image": "/images/placeholder_mem.jpg",
+      "audio_url": "/audio/placeholder_mem.mp3",
       "order": 1
     },
     {
@@ -22,8 +22,8 @@
         "lat": 56.3280,
         "lon": 44.0085
       },
-      "image": "/images/zelensky-descent.jpg",
-      "audio_url": "/audio/zelensky-descent.mp3",
+      "image": "/images/placeholder_mem.jpg",
+      "audio_url": "/audio/placeholder_mem.mp3",
       "order": 2
     },
     {
@@ -35,8 +35,8 @@
         "lat": 56.3290,
         "lon": 44.0095
       },
-      "image": "/images/bugrov-shelter.jpg",
-      "audio_url": "/audio/bugrov-shelter.mp3",
+      "image": "/images/placeholder_mem.jpg",
+      "audio_url": "/audio/placeholder_mem.mp3",
       "order": 3
     }
   ]

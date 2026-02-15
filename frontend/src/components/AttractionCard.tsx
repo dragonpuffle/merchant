@@ -9,6 +9,7 @@ interface AttractionCardProps {
   hasNextPoint: boolean;
   currentPointNumber: number;
   totalPoints: number;
+  isCustomRoute?: boolean;
 }
 
 export default function AttractionCard({ 
@@ -17,7 +18,8 @@ export default function AttractionCard({
   onNextPoint, 
   hasNextPoint,
   currentPointNumber,
-  totalPoints 
+  totalPoints,
+  isCustomRoute = false
 }: AttractionCardProps) {
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -51,9 +53,11 @@ export default function AttractionCard({
         }}
       />
 
-      <div className="point-indicator">
-        Точка {currentPointNumber} из {totalPoints}
-      </div>
+      {!isCustomRoute && (
+        <div className="point-indicator">
+          Точка {currentPointNumber} из {totalPoints}
+        </div>
+      )}
 
       <h2 className="attraction-name">{attraction.name}</h2>
       <p className="attraction-address">{attraction.address}</p>
@@ -66,7 +70,7 @@ export default function AttractionCard({
         onPause={handlePause}
       />
 
-      {hasNextPoint && (
+      {!isCustomRoute && hasNextPoint && (
         <button
           className="next-point-button"
           onClick={onNextPoint}

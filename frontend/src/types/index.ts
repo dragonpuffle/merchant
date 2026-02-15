@@ -39,3 +39,45 @@ export interface ErrorResponse {
   detail: string;
   status_code: number;
 }
+
+// Reward types
+export interface Reward {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  points: number;
+  unlocked: boolean;
+  unlockedAt?: string;
+}
+
+export interface UserProgress {
+  totalPoints: number;
+  visitedAttractions: string[];
+  completedRoutes: string[];
+  rewardsUnlocked: string[];
+  currentStreak: number;
+}
+
+// Settings types
+export interface AppSettings {
+  notifications: boolean;
+  soundEffects: boolean;
+  autoPlayAudio: boolean;
+  language: 'ru' | 'en';
+  theme: 'light' | 'dark' | 'auto';
+}
+
+// Navigation types
+export type AppView = 
+  | 'route-selection' 
+  | 'map-view' 
+  | 'custom-route' 
+  | 'rewards' 
+  | 'settings';
+
+export interface NavigationItem {
+  id: AppView;
+  label: string;
+  icon: string;
+}

@@ -9,6 +9,26 @@ import type {
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/v1';
 
+// Get the base URL for backend (without /api/v1 suffix)
+export const getBackendBaseUrl = (): string => {
+  const apiUrl = API_URL.replace(/\/api\/v1$/, '');
+  return apiUrl;
+};
+
+// Normalize URL to use full backend URL if it's a relative path
+// Note: For images and audio files, we use relative paths so nginx can proxy them
+export const normalizeUrl = (url: string): string => {
+  // For images and audio files, use relative paths (nginx will proxy them)
+  if (url.startsWith('/images/') || url.startsWith('/audio/')) {
+    return url;
+  }
+  // For other relative paths, use full backend URL
+  if (url.startsWith('/')) {
+    return `${getBackendBaseUrl()}${url}`;
+  }
+  return url;
+};
+
 class ApiError extends Error {
   constructor(public detail: string, public statusCode: number) {
     super(detail);
