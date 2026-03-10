@@ -36,7 +36,7 @@
         "lon": 43.997378
       },
       "image": "/images/bugrov-night-shelter.webp",
-      "audio_url": "/audio/generated1.mp3",
+      "audio_url": "/audio/bugrov-night-shelter.mp3",
       "order": 3
     },
     {
@@ -75,7 +75,7 @@
         "lon": 43.992878
       },
       "image": "/images/rukavishnikov-bank.webp",
-      "audio_url": "/audio/generated1.mp3",
+      "audio_url": "/audio/rukavishnikov-bank.mp3",
       "order": 6
     },
     {
@@ -114,7 +114,7 @@
         "lon": 43.988613
       },
       "image": "/images/blinovsky-passage.webp",
-      "audio_url": "/audio/generated1.mp3",
+      "audio_url": "/audio/blinovsky-passage.mp3",
       "order": 9
     },
     {
