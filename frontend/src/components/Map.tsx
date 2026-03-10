@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { YMaps, Map as YandexMap, Placemark, Polyline } from '@pbe/react-yandex-maps';
 import type { Attraction, Route } from '../types';
+import { useGeolocation } from '../services/geolocation';
+import UserLocationMarker, { CenterOnUserButton } from './UserLocationMarker';
+import GeolocationNotification from './GeolocationNotification';
 
 interface MapProps {
   attractions: Attraction[];
@@ -19,6 +22,11 @@ export default function Map({
   onAttractionClick,
   isCustomRoute: _isCustomRoute = false,
 }: MapProps) {
+  // Geolocation state
+  const geoState = useGeolocation();
+  const [showUserLocation, setShowUserLocation] = useState(false);
+  const [isCenteringOnUser, setIsCenteringOnUser] = useState(false);
+
   const [mapState] = useState({
     center: [56.3269, 44.0075] as [number, number],
     zoom: 14,
@@ -33,6 +41,46 @@ export default function Map({
 
   // Ссылка на текущий объект мультимаршрута
   const multiRouteRef = useRef<any>(null);
+
+  // Start geolocation when component mounts
+  useEffect(() => {
+    // Check if geolocation is supported
+    if (!geoState.isSupported()) {
+      console.warn('Geolocation is not supported');
+      return;
+    }
+
+    // Start watching location
+    geoState.startWatching({
+      enableHighAccuracy: true,
+      timeout: 10000,
+      maximumAge: 5000,
+    });
+
+    // Cleanup on unmount
+    return () => {
+      geoState.stopWatching();
+    };
+  }, []);
+
+  // Center map on user location when position is available and centering is requested
+  useEffect(() => {
+    if (isCenteringOnUser && geoState.position && map) {
+      map.setCenter(
+        [geoState.position.latitude, geoState.position.longitude],
+        16,
+        { duration: 500 }
+      );
+      setIsCenteringOnUser(false);
+    }
+  }, [geoState.position, isCenteringOnUser, map]);
+
+  // Show user location marker when position is available
+  useEffect(() => {
+    if (geoState.position) {
+      setShowUserLocation(true);
+    }
+  }, [geoState.position]);
 
   // Центрирование карты при выборе достопримечательности
   useEffect(() => {
@@ -156,8 +204,44 @@ export default function Map({
     setYmaps(ymapsInstance);
   };
 
+  // Handle centering on user location
+  const handleCenterOnUser = async () => {
+    setIsCenteringOnUser(true);
+    
+    // If we don't have a position yet, try to get it
+    if (!geoState.position) {
+      const position = await geoState.getCurrentPosition();
+      if (position) {
+        setShowUserLocation(true);
+      }
+    }
+  };
+
+  // Handle permission request
+  const handleRequestPermission = async () => {
+    await geoState.requestPermission();
+    if (geoState.status !== 'error') {
+      await geoState.startWatching();
+    }
+  };
+
+  // Handle notification dismiss
+  const handleDismissNotification = () => {
+    // User dismissed the notification, we can hide it
+    // The notification component will handle visibility based on state
+  };
+
   return (
     <div className="map-container">
+      {/* Geolocation notification */}
+      <GeolocationNotification
+        status={geoState.status}
+        error={geoState.error}
+        isGPSEnabled={geoState.isGPSEnabled}
+        onRequestPermission={handleRequestPermission}
+        onDismiss={handleDismissNotification}
+      />
+
       <YMaps
         query={{ apikey: import.meta.env.VITE_YANDEX_MAPS_API_KEY || ''}}
         enterprise={false}
@@ -195,6 +279,13 @@ export default function Map({
             />
           )}
 
+          {/* User location marker with accuracy circle */}
+          <UserLocationMarker
+            position={geoState.position}
+            isVisible={showUserLocation}
+            onCenterClick={handleCenterOnUser}
+          />
+
           {/* Метки достопримечательностей */}
           {attractions.map((attraction) => {
             const isRouteAttraction = route?.attraction_ids.includes(attraction.id);
@@ -227,6 +318,13 @@ export default function Map({
           })}
         </YandexMap>
       </YMaps>
+
+      {/* Center on user button */}
+      <CenterOnUserButton
+        onClick={handleCenterOnUser}
+        isVisible={geoState.isSupported()}
+        isLoading={geoState.status === 'requesting_permission'}
+      />
     </div>
   );
 }
