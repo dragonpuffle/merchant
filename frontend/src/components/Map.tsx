@@ -163,7 +163,7 @@ export default function Map({
           )}
 
           {/* Если точек маршрута нет, но есть готовая ломаная из route (например, из БД) */}
-          {!fallbackPolyline && routeAttractions.length === 0 && route?.polyline?.length > 0 && (
+          {!fallbackPolyline && routeAttractions.length === 0 && route && route.polyline && route.polyline.length > 0 && (
             <Polyline
               geometry={route.polyline}
               options={{

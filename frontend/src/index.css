@@ -4,6 +4,13 @@
   box-sizing: border-box;
 }
 
+/* ИСПРАВЛЕНИЕ: Глобальные стили для всех изображений - обеспечивают адаптивность */
+img {
+  max-width: 100%; /* Изображения не превышают ширину контейнера */
+  height: auto; /* Автоматическая высота для сохранения пропорций */
+  display: block; /* Устраняет проблемы с inline-элементами */
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -165,6 +172,7 @@ body {
 
 /* Attraction Card Styles */
 .attraction-card {
+  /* ИСПРАВЛЕНИЕ: Улучшенный контейнер для карточки с адаптивной версткой */
   position: fixed;
   bottom: 0;
   left: 0;
@@ -177,6 +185,8 @@ body {
   overflow-y: auto;
   transition: transform 0.3s ease;
   z-index: 1000;
+  display: flex;
+  flex-direction: column; /* Flexbox для лучшей адаптивности */
 }
 
 .attraction-card.hidden {
@@ -218,12 +228,18 @@ body {
 }
 
 .attraction-image {
+  /* ИСПРАВЛЕНИЕ: Изображение теперь полностью видимо и сохраняет пропорции */
   width: 100%;
-  height: 220px;
-  object-fit: cover;
+  max-width: 100%; /* Гарантирует, что изображение не превышает ширину контейнера */
+  height: auto; /* Автоматическая высота для сохранения пропорций */
+  max-height: 300px; /* Максимальная высота для предотвращения слишком больших изображений */
+  object-fit: contain; /* Изображение полностью помещается в контейнер без обрезки */
   border-radius: 12px;
   margin-bottom: 16px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: block; /* Устраняет проблемы с inline-элементами */
+  margin-left: auto; /* Центрирование изображения */
+  margin-right: auto; /* Центрирование изображения */
 }
 
 .attraction-name {
@@ -401,12 +417,107 @@ body {
     max-height: 80vh;
   }
 
+  /* ИСПРАВЛЕНИЕ: Адаптивное масштабирование изображения для планшетов */
   .attraction-image {
-    height: 180px;
+    max-height: 250px; /* Уменьшенная максимальная высота для планшетов */
   }
 
   .attraction-name {
     font-size: 20px;
+  }
+
+  /* ИСПРАВЛЕНИЕ: Адаптивные миниатюры для планшетов */
+  .attraction-item-image {
+    width: 70px;
+    height: 70px;
+    min-width: 70px;
+  }
+
+  .selected-attraction-preview img {
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+  }
+}
+
+/* ИСПРАВЛЕНИЕ: Адаптивность для мобильных устройств */
+@media (max-width: 480px) {
+  .attraction-card {
+    padding: 12px;
+    max-height: 85vh;
+  }
+
+  /* ИСПРАВЛЕНИЕ: Адаптивное масштабирование изображения для мобильных */
+  .attraction-image {
+    max-height: 200px; /* Еще меньшая максимальная высота для мобильных */
+  }
+
+  .attraction-name {
+    font-size: 18px;
+  }
+
+  .attraction-address {
+    font-size: 13px;
+  }
+
+  .attraction-description {
+    font-size: 14px;
+  }
+
+  /* ИСПРАВЛЕНИЕ: Адаптивные миниатюры для мобильных */
+  .attraction-item-image {
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+  }
+
+  .attraction-item-name {
+    font-size: 14px;
+  }
+
+  .attraction-item-address {
+    font-size: 12px;
+  }
+
+  .attraction-item-description {
+    font-size: 12px;
+  }
+
+  .selected-attraction-preview img {
+    width: 45px;
+    height: 45px;
+    min-width: 45px;
+  }
+
+  .preview-name {
+    font-size: 14px;
+  }
+
+  .preview-address {
+    font-size: 12px;
+  }
+}
+
+/* ИСПРАВЛЕНИЕ: Адаптивность для очень маленьких экранов */
+@media (max-width: 360px) {
+  .attraction-image {
+    max-height: 180px;
+  }
+
+  .attraction-name {
+    font-size: 16px;
+  }
+
+  .attraction-item-image {
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+  }
+
+  .selected-attraction-preview img {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
   }
 }
 
@@ -1060,17 +1171,25 @@ body {
 }
 
 .attraction-item-image {
+  /* ИСПРАВЛЕНИЕ: Контейнер для миниатюры с адаптивными размерами */
   width: 80px;
   height: 80px;
+  min-width: 80px; /* Предотвращает сжатие на маленьких экранах */
   border-radius: 12px;
   overflow: hidden;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5; /* Фон для прозрачных изображений */
 }
 
 .attraction-item-image img {
+  /* ИСПРАВЛЕНИЕ: Миниатюра полностью видима с сохранением пропорций */
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain; /* Изображение полностью помещается без обрезки */
+  display: block;
 }
 
 .attraction-item-content {
@@ -1178,10 +1297,14 @@ body {
 }
 
 .selected-attraction-preview img {
+  /* ИСПРАВЛЕНИЕ: Превью изображения полностью видимо с сохранением пропорций */
   width: 60px;
   height: 60px;
+  min-width: 60px; /* Предотвращает сжатие */
   border-radius: 8px;
-  object-fit: cover;
+  object-fit: contain; /* Изображение полностью помещается без обрезки */
+  display: block;
+  background: #f5f5f5; /* Фон для прозрачных изображений */
 }
 
 .preview-info {
