@@ -138,14 +138,14 @@ export default function Settings({ settings, onSettingsChange, onBack }: Setting
               className={`language-option ${localSettings.language === 'ru' ? 'active' : ''}`}
               onClick={() => handleLanguageChange('ru')}
             >
-              <span className="language-flag">🇷🇺</span>
+              <span className="language-flag">🇷🇺s</span>
               <span className="language-name">Русский</span>
             </button>
             <button
               className={`language-option ${localSettings.language === 'en' ? 'active' : ''}`}
               onClick={() => handleLanguageChange('en')}
             >
-              <span className="language-flag">🇬🇧</span>
+              <span className="language-flag">eng</span>
               <span className="language-name">English</span>
             </button>
           </div>
@@ -184,7 +184,7 @@ export default function Settings({ settings, onSettingsChange, onBack }: Setting
           
           <div className="info-item">
             <div className="info-label">Версия</div>
-            <div className="info-value">0.0.1</div>
+            <div className="info-value">0.2.0</div>
           </div>
           
           <div className="info-item">

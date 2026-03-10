@@ -19,7 +19,7 @@ export default function Map({
   onAttractionClick,
   isCustomRoute: _isCustomRoute = false,
 }: MapProps) {
-  const [mapState, setMapState] = useState({
+  const [mapState] = useState({
     center: [56.3269, 44.0075] as [number, number],
     zoom: 14,
   });
@@ -36,18 +36,40 @@ export default function Map({
 
   // Центрирование карты при выборе достопримечательности
   useEffect(() => {
-    if (selectedAttraction) {
-      setMapState({
-        center: [selectedAttraction.coordinates.lat, selectedAttraction.coordinates.lon] as [number, number],
-        zoom: 16,
-      });
+    if (selectedAttraction && map) {
+      // Используем API карты для плавного перемещения к точке
+      map.setCenter(
+        [selectedAttraction.coordinates.lat, selectedAttraction.coordinates.lon],
+        16,
+        { duration: 500 }
+      );
     }
-  }, [selectedAttraction]);
+  }, [selectedAttraction, map]);
 
   // Сброс fallback-линии при смене маршрута
   useEffect(() => {
     setFallbackPolyline(null);
   }, [route, routeAttractions]);
+
+  // Центрирование карты на маршруте при его создании
+  useEffect(() => {
+    if (routeAttractions.length >= 2 && map && !selectedAttraction) {
+      // Вычисляем границы маршрута
+      const bounds = routeAttractions.reduce((acc, attraction) => [
+        [Math.min(acc[0][0], attraction.coordinates.lat), Math.min(acc[0][1], attraction.coordinates.lon)],
+        [Math.max(acc[1][0], attraction.coordinates.lat), Math.max(acc[1][1], attraction.coordinates.lon)]
+      ], [
+        [routeAttractions[0].coordinates.lat, routeAttractions[0].coordinates.lon],
+        [routeAttractions[0].coordinates.lat, routeAttractions[0].coordinates.lon]
+      ]);
+
+      // Применяем границы с небольшим отступом
+      map.setBounds(bounds, {
+        checkZoomRange: true,
+        duration: 500
+      });
+    }
+  }, [routeAttractions, map, selectedAttraction]);
 
   // Управление маршрутом: создание, обновление, удаление
   useEffect(() => {
@@ -88,7 +110,6 @@ export default function Map({
           },
         },
         {
-          boundsAutoApply: true, // автоматически подбирать границы карты
           // Настройки внешнего вида линии
           wayPointVisible:false,
           routeWalkMarkerVisible: false,
@@ -163,7 +184,7 @@ export default function Map({
           )}
 
           {/* Если точек маршрута нет, но есть готовая ломаная из route (например, из БД) */}
-          {!fallbackPolyline && routeAttractions.length === 0 && route?.polyline?.length > 0 && (
+          {!fallbackPolyline && routeAttractions.length === 0 && route && route.polyline && route.polyline.length > 0 && (
             <Polyline
               geometry={route.polyline}
               options={{
