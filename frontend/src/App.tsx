@@ -147,7 +147,7 @@ function App() {
     setSelectedRoute(route);
     setIsCustomRoute(false);
     setCurrentView('map-view');
-    
+
     const firstAttraction = attractions.find(a => route.attraction_ids.includes(a.id));
     if (firstAttraction) {
       setSelectedAttraction(firstAttraction);
