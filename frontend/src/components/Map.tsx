@@ -51,26 +51,6 @@ export default function Map({
     setFallbackPolyline(null);
   }, [route, routeAttractions]);
 
-  // Центрирование карты на маршруте при его создании
-  useEffect(() => {
-    if (routeAttractions.length >= 2 && map && !selectedAttraction) {
-      // Вычисляем границы маршрута
-      const bounds = routeAttractions.reduce((acc, attraction) => [
-        [Math.min(acc[0][0], attraction.coordinates.lat), Math.min(acc[0][1], attraction.coordinates.lon)],
-        [Math.max(acc[1][0], attraction.coordinates.lat), Math.max(acc[1][1], attraction.coordinates.lon)]
-      ], [
-        [routeAttractions[0].coordinates.lat, routeAttractions[0].coordinates.lon],
-        [routeAttractions[0].coordinates.lat, routeAttractions[0].coordinates.lon]
-      ]);
-
-      // Применяем границы с небольшим отступом
-      map.setBounds(bounds, {
-        checkZoomRange: true,
-        duration: 500
-      });
-    }
-  }, [routeAttractions, map, selectedAttraction]);
-
   // Управление маршрутом: создание, обновление, удаление
   useEffect(() => {
     if (!ymaps || !map) return;
