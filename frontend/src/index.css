@@ -62,7 +62,7 @@ body {
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
-  overflow: hidden; /* Prevent content overflow */
+  overflow-y: auto; /* Enable vertical scrolling on the content container */
 }
 
 .route-selection-title {
@@ -79,10 +79,7 @@ body {
   flex-direction: column;
   gap: 16px;
   margin-bottom: 24px;
-  overflow-y: auto; /* Enable vertical scrolling */
-  flex: 1; /* Allow list to take available space */
-  min-height: 0; /* Important for flex child scrolling */
-  padding-right: 8px; /* Space for scrollbar */
+  /* Scrolling is now handled by the parent container */
 }
 
 .route-card {
@@ -182,21 +179,21 @@ body {
 }
 
 /* Custom Scrollbar Styles */
-.routes-list::-webkit-scrollbar {
+.route-selection-content::-webkit-scrollbar {
   width: 6px;
 }
 
-.routes-list::-webkit-scrollbar-track {
+.route-selection-content::-webkit-scrollbar-track {
   background: #f1f1f1;
   border-radius: 3px;
 }
 
-.routes-list::-webkit-scrollbar-thumb {
+.route-selection-content::-webkit-scrollbar-thumb {
   background: #667eea;
   border-radius: 3px;
 }
 
-.routes-list::-webkit-scrollbar-thumb:hover {
+.route-selection-content::-webkit-scrollbar-thumb:hover {
   background: #764ba2;
 }
 
