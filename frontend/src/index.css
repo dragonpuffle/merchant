@@ -48,15 +48,21 @@ body {
   justify-content: center;
   padding: 20px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  overflow: hidden; /* Prevent body scroll */
 }
 
 .route-selection-content {
   width: 100%;
   max-width: 500px;
+  max-height: calc(100vh - 100px); /* Account for bottom navigation height */
   background: white;
   border-radius: 20px;
   padding: 30px;
+  padding-bottom: 40px; /* Extra bottom padding for button visibility */
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Prevent content overflow */
 }
 
 .route-selection-title {
@@ -65,6 +71,7 @@ body {
   color: #333;
   margin-bottom: 24px;
   text-align: center;
+  flex-shrink: 0; /* Prevent title from shrinking */
 }
 
 .routes-list {
@@ -72,6 +79,10 @@ body {
   flex-direction: column;
   gap: 16px;
   margin-bottom: 24px;
+  overflow-y: auto; /* Enable vertical scrolling */
+  flex: 1; /* Allow list to take available space */
+  min-height: 0; /* Important for flex child scrolling */
+  padding-right: 8px; /* Space for scrollbar */
 }
 
 .route-card {
@@ -168,6 +179,25 @@ body {
 .start-button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+/* Custom Scrollbar Styles */
+.routes-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.routes-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.routes-list::-webkit-scrollbar-thumb {
+  background: #667eea;
+  border-radius: 3px;
+}
+
+.routes-list::-webkit-scrollbar-thumb:hover {
+  background: #764ba2;
 }
 
 /* Attraction Card Styles */
@@ -398,12 +428,19 @@ body {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .route-selection {
+    padding: 10px; /* Reduced padding on tablets */
+  }
+
   .route-selection-content {
     padding: 20px;
+    padding-bottom: 30px; /* Extra bottom padding for button visibility */
+    max-height: calc(100vh - 90px); /* Account for bottom navigation on tablets */
   }
 
   .route-selection-title {
     font-size: 24px;
+    margin-bottom: 16px;
   }
 
   .route-card-name {
@@ -446,6 +483,52 @@ body {
 
 /* ИСПРАВЛЕНИЕ: Адаптивность для мобильных устройств */
 @media (max-width: 480px) {
+  .route-selection {
+    padding: 8px; /* Minimal padding on mobile */
+  }
+
+  .route-selection-content {
+    padding: 16px;
+    padding-bottom: 30px; /* Extra bottom padding for button visibility */
+    max-height: calc(100vh - 100px); /* Account for bottom navigation (raised higher) */
+    max-width: 100%; /* Full width on mobile */
+  }
+
+  .route-selection-title {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+
+  .routes-list {
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .route-card {
+    padding: 12px;
+  }
+
+  .route-card-number {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+    margin-right: 12px;
+  }
+
+  .route-card-name {
+    font-size: 15px;
+  }
+
+  .route-card-description {
+    font-size: 12px;
+  }
+
+  .start-button {
+    padding: 14px;
+    font-size: 16px;
+    flex-shrink: 0; /* Prevent button from shrinking */
+  }
+
   .attraction-card {
     /* ИСПРАВЛЕНИЕ: Компактная карточка для мобильных */
     padding: 12px;
@@ -507,6 +590,50 @@ body {
 
 /* ИСПРАВЛЕНИЕ: Адаптивность для очень маленьких экранов */
 @media (max-width: 360px) {
+  .route-selection {
+    padding: 4px; /* Minimal padding on very small screens */
+  }
+
+  .route-selection-content {
+    padding: 12px;
+    padding-bottom: 30px; /* Extra bottom padding for button visibility */
+    max-height: calc(100vh - 95px); /* Account for bottom navigation (raised higher) */
+  }
+
+  .route-selection-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .routes-list {
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .route-card {
+    padding: 10px;
+  }
+
+  .route-card-number {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+    margin-right: 10px;
+  }
+
+  .route-card-name {
+    font-size: 14px;
+  }
+
+  .route-card-description {
+    font-size: 11px;
+  }
+
+  .start-button {
+    padding: 12px;
+    font-size: 14px;
+  }
+
   .attraction-card {
     /* ИСПРАВЛЕНИЕ: Очень компактная карточка для маленьких экранов */
     padding: 10px;
